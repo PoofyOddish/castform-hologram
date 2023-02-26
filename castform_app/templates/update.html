@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <img id="castform_image" src="static/castform-sunny.png">
+    <br>
+    <div id="castform_text">boop</div>
+
+    <script>
+        var a = $.get("/api/status");
+        var start = new Date;
+
+        
+        function check_castform_status() {
+            $.get("/api/status",function(data){
+                $("#castform_image").attr("src","static/"+data[0]);
+                $("#castform_text").text(data[1]);
+            });
+        };
+
+        setInterval(function() {
+            $('.Timer').text((new Date - start) / 10000 + " Seconds");
+            check_castform_status();
+        }, 10000);
+
+    </script>
+{% endblock %}
