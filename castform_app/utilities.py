@@ -1,3 +1,6 @@
+def testAirflow():
+    return("test is a success!")
+
 def getNWS():
     import requests
 
@@ -37,16 +40,35 @@ def updateWeather():
     insertNWS(transformed_data)
 
 def getCastform():
-    return(manual_query(create_connection(),f"select * from vw_castform;",False,True)[0])
+    import os, requests,json
+    from dotenv import load_dotenv
+    load_dotenv()
+
+    api_url = os.environ.get('API_URL')+"/rest/v1/vw_castform"
+    api_key = os.environ.get('API_KEY')
+    
+    headers = {
+    'apikey': api_key,
+    'Authorization': f'Bearer {api_key}'
+    }
+
+    response = requests.request("GET", api_url, headers=headers)
+
+    return(json.loads(response.text))
 
 
 ### QUERIES
-def create_connection(db_file='./instance/castform.sqlite'):
+#def create_connection(db_file='./instance/castform.sqlite'):
+def create_connection(db_file='/opt/app/instance/castform.sqlite'):
     """ create a database connection to the SQLite database
         specified by the db_file
     :param db_file: database file
     :return: Connection object or None
     """
+    import os
+
+            #api_key = os.getenv('API_URL')
+            #api_key = os.getenv('API_KEY')
     import sqlite3
 
     conn = None

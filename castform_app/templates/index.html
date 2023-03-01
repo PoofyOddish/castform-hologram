@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <img id="castform_image" class="floating" src="static/{{castform[0]}}">
+    <img id="castform_image" class="floating" src="static/{{castform['img']}}">
     <br>
-    <div id="castform_text">{{castform[1]}}</div>
+    <div id="castform_text">{{castform['forecast']}}</div>
 
     <script>
         var a = $.get("/api/status");
@@ -12,15 +12,15 @@
         
         function check_castform_status() {
             $.get("/api/status",function(data){
-                $("#castform_image").attr("src","static/"+data[0]);
-                $("#castform_text").text(data[1]);
+                $("#castform_image").attr("src","static/"+data[0]['img']);
+                $("#castform_text").text(data[1]['forecast']);
             });
         };
 
         setInterval(function() {
-            $('.Timer').text((new Date - start) / 1800 + " Seconds");
+            $('.Timer').text((new Date - start) / 180000 + " Seconds");
             check_castform_status();
-        }, 1800);
+        }, 180000);
 
     </script>
 {% endblock %}

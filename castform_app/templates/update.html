@@ -18,9 +18,9 @@
         };
 
         setInterval(function() {
-            $('.Timer').text((new Date - start) / 10000 + " Seconds");
+            $('.Timer').text((new Date - start) / 1000 + " Seconds");
             check_castform_status();
-        }, 10000);
+        }, 1000);
 
     </script>
 {% endblock %}
