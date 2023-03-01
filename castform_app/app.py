@@ -4,29 +4,32 @@ from flask import (
 
 app = Flask(__name__)
 
-bp = Blueprint('main', __name__)
+#bp = Blueprint('main', __name__)
 
-@bp.route('/')
+@app.route('/')
 def index():
-    from castform_app.utilities import getCastform
+    try:
+        from utilities import getCastform
+    except:
+        return 'sorry import not found'
 
     castform = getCastform()
     #print(castform)
     return render_template('index.html',castform=castform[0])
 
-@bp.route('/api/status')
+@app.route('/api/status')
 def status():
-    from castform_app.utilities import getCastform
+    from utilities import getCastform
     from flask import jsonify
 
     castform = getCastform()
     #print(castform[0]['img'])
     #print(castform['img'])
 
-    #return jsonify(castform)
-    return render_template('index.html',castform=castform[0])
+    return jsonify(castform)
+    #return render_template('index.html',castform=castform[0])
 
-@bp.route('/update')
+@app.route('/update')
 def update():
    return render_template('update.html')
 
