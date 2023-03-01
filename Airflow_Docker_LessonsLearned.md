@@ -53,7 +53,7 @@ Example Airflow DAG Status:
 ![Airflow_Status](./airflow_docker_static/airflow_status.png)
 
 Example Airflow DAG Structure:
-![Airflow_DAG](./airflow_docker_static/airflow_dag.png)
+![Airflow_DAG](./airflow_docker_static/airflow_DAG.png)
 
 Example Airflow Task Workflow:
 ![Airflow_Tasks](./airflow_docker_static/airflow_workflow.png)
