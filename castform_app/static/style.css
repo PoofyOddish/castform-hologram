@@ -1,6 +1,6 @@
 .floating { 
     animation-name: floating;
-    animation-duration: 3s;
+    animation-duration: 10s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
     margin-left: 30px;
@@ -9,6 +9,8 @@
 
 @keyframes floating {
     0% { transform: translate(0,  0px); }
-    50%  { transform: translate(-5px, 15px); }
-    100%   { transform: translate(0, -0px); }   
+    25%  { transform: translate(0, 15px); }
+    50%   { transform: translate(0, -0px) scaleX(-1); }  
+    75%   { transform: translate(0, 15px) scaleX(-1); } 
+    100%   { transform: translate(0, 0px) scaleX(1); }  
 }
