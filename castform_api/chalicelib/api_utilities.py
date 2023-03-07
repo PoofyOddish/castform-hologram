@@ -1,21 +1,19 @@
 
-def update_db(apiurl,apikey,endpoint,api_method,headers,payload) -> None:
+def query_db(apiurl,apikey,endpoint,api_method,headers,payload) -> None:
     import os,requests
-    
-    from dotenv import load_dotenv
-
-    load_dotenv()
 
     sb_url = apiurl+endpoint
-    sb_key = apikey+("API_KEY")
+    sb_key = apikey
 
     headers['apikey']=sb_key
     headers['authorization']=f'Bearer {sb_key}'
 
     response = requests.request(api_method, sb_url, headers=headers, data=payload)
 
+    return(response)
+
 def deactivate_weather(apiurl,apikey) -> None:
-    import requests,json,os
+    import json
 
     payload = json.dumps({
         "isactive": False,
@@ -26,7 +24,7 @@ def deactivate_weather(apiurl,apikey) -> None:
     'Prefer': 'return=minimal',
     }
 
-    update_db(apiurl,apikey,"/rest/v1/weather?isactive=eq.true","PATCH", headers=headers, payload=payload)
+    query_db(apiurl,apikey,"/rest/v1/weather?isactive=eq.true","PATCH", headers=headers, payload=payload)
 
 def pull_NWS() -> list:
     import requests, json
@@ -72,6 +70,6 @@ def update_NWS(apiurl,apikey) -> list:
         'Prefer': 'return=minimal'
         }
 
-        update_db(apiurl,apikey,"/rest/v1/weather","POST",headers,payload)
+        query_db(apiurl,apikey,"/rest/v1/weather","POST",headers,payload)
 
         return(payload)
